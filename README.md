@@ -29,17 +29,15 @@ The project opens a PikaScript shell on the UART console by calling into `pikaSc
 At 115200 baud at TX = PA9. RX (PA10) is unused.
 
 ```
-  pikaMain = pikaScriptInit();
-  // add special LED object to it
-  obj_newObj(pikaMain, "led", "LED", New_LED);
-
-  // print some debug info after basic init
-  printf("memory used now: %d B\r\n", pikaMemNow());
-  printf("memory used max: %d B\r\n", pikaMemMax());
-
-  // start shell and stay there
-  printf("Launching PikaScript shell.\r\n");
-  pikaScriptShell(pikaMain);
+======[pikascript packages installed]======
+PikaStdDevice==latest
+PikaStdLib==latest
+STM32F1==latest
+pikascript-core==latest
+===========================================
+memory used now: 156 B
+memory used max: 848 B
+Launching PikaScript shell.
 >>> 
 ```
 
