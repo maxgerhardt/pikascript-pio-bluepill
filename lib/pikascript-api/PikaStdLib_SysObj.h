@@ -14,6 +14,7 @@ void PikaStdLib_SysObj___set__(PikaObj *self, Arg * key, Arg * obj, char * obj_s
 float PikaStdLib_SysObj_float(PikaObj *self, Arg * arg);
 int PikaStdLib_SysObj_int(PikaObj *self, Arg * arg);
 Arg * PikaStdLib_SysObj_iter(PikaObj *self, Arg * arg);
+int PikaStdLib_SysObj_len(PikaObj *self, Arg * arg);
 Arg * PikaStdLib_SysObj_range(PikaObj *self, int a1, int a2);
 void PikaStdLib_SysObj_remove(PikaObj *self, char * argPath);
 char * PikaStdLib_SysObj_str(PikaObj *self, Arg * arg);

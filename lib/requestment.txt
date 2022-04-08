@@ -1,0 +1,4 @@
+pikascript-core==latest
+PikaStdLib==latest
+PikaStdDevice==latest
+STM32F1==latest
