@@ -141,6 +141,7 @@ int main(void)
   printf("memory used max: %d B\r\n", pikaMemMax());
 
   // start shell and stay there
+  printf("Launching PikaScript shell.\r\n");
   pikaScriptShell(pikaMain);
   // pikaScriptShell(pikaScriptInit());
 
