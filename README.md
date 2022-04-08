@@ -2,7 +2,7 @@
 
 ## Description
 
-Uses the sources from http://pikascript.com/ for stm32f103c8, with all versions set to "latest".
+Uses the sources from http://pikascript.com/ for stm32f103c8, with all versions set to "latest". See https://github.com/pikasTech/pikascript.
 
 Code adaptions based on https://github.com/pikasTech/pikascript-demo-stm32/tree/main/stm32f103c8t6/01-demo-pikascript-stm32f103c8t6-led.
 
