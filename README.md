@@ -8,9 +8,7 @@ Code adaptions based on https://github.com/pikasTech/pikascript-demo-stm32/tree/
 
 And makes it a PlatformIO-compilable project, meaning you can install VSCode + PlatformIO extension (https://platformio.org/install/ide?install=vscode) and open the project and debug as normal.
 
-The project blinks the PC13 LED with a custom-made Python object that has its Python member methods bound to C functions.
-
-The main loop runs Python code which in turn calls into the C bindings
+The project opens a PikaScript shell on the UART console by calling into `pikaScriptShell()`. 
 
 ```cpp
   PikaObj *root = newRootObj("root",New_MyRoot);

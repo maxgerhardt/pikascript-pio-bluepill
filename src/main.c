@@ -135,7 +135,11 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   asm(".global _printf_float");
+  HAL_Delay(1000); // small delay before monitor is opened
   pikaMain = pikaScriptInit();
+  // add special LED object to it
+  obj_newObj(pikaMain, "led", "LED", New_LED);
+
   // print some debug info after basic init
   printf("memory used now: %d B\r\n", pikaMemNow());
   printf("memory used max: %d B\r\n", pikaMemMax());
