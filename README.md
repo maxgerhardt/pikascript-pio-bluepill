@@ -43,14 +43,14 @@ Launching PikaScript shell.
 
 There is the special built-in `led` object that the firmware creates with `on()` and `off()` methods.
 
-```
+```py
 >>> led.on()
 >>> led.off()
 ```
 
 Basic Python-like commands can be executed
 
-```
+```py
 >>> 1 + 1
 2
 >>> 1.2 + 3.3
@@ -63,7 +63,7 @@ Hello world
 
 Special libraries can be imported as seen e.g. in the [example](https://github.com/pikasTech/pikascript/blob/master/examples/GPIO/main.py).
 
-```
+```py
 >>> import PikaStdLib
 >>> import machine
 >>> mem = PikaStdLib.MemChecker()
