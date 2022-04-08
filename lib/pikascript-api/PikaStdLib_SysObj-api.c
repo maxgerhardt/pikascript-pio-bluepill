@@ -40,6 +40,12 @@ void PikaStdLib_SysObj_iterMethod(PikaObj *self, Args *args){
     method_returnArg(args, res);
 }
 
+void PikaStdLib_SysObj_lenMethod(PikaObj *self, Args *args){
+    Arg * arg = args_getArg(args, "arg");
+    int res = PikaStdLib_SysObj_len(self, arg);
+    method_returnInt(args, res);
+}
+
 void PikaStdLib_SysObj_rangeMethod(PikaObj *self, Args *args){
     int a1 = args_getInt(args, "a1");
     int a2 = args_getInt(args, "a2");
@@ -70,6 +76,7 @@ PikaObj *New_PikaStdLib_SysObj(Args *args){
     class_defineMethod(self, "float(arg:any)->float", PikaStdLib_SysObj_floatMethod);
     class_defineMethod(self, "int(arg:any)->int", PikaStdLib_SysObj_intMethod);
     class_defineMethod(self, "iter(arg:any)->any", PikaStdLib_SysObj_iterMethod);
+    class_defineMethod(self, "len(arg:any)->int", PikaStdLib_SysObj_lenMethod);
     class_defineMethod(self, "range(a1:int,a2:int)->any", PikaStdLib_SysObj_rangeMethod);
     class_defineMethod(self, "remove(argPath:str)", PikaStdLib_SysObj_removeMethod);
     class_defineMethod(self, "str(arg:any)->str", PikaStdLib_SysObj_strMethod);
