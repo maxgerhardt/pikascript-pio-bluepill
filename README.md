@@ -74,4 +74,19 @@ Special libraries can be imported as seen e.g. in the [example](https://github.c
 >>>
 ```
 
+Blinky code using the STM32F1 libary:
+
+```py
+>>> import STM32F1
+>>> x = STM32F1.GPIO()
+>>> x
+>>> x.init()
+>>> x.setPin('PC13')
+>>> x.setMode('out')
+>>> x.enable()
+>>> x.low()
+>>> x.high()
+>>> x.low()
+>>> x.high()
+```
 Some aspects don't yet seem to work though: https://github.com/pikasTech/pikascript/issues
