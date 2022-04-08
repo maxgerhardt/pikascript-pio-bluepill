@@ -134,26 +134,20 @@ int main(void)
   MX_USART1_UART_Init();
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  // pikaMain = pikaScriptInit();
-  PikaObj *root = newRootObj("root", New_MyRoot);
+  asm(".global _printf_float");
+  pikaMain = pikaScriptInit();
+  // print some debug info after basic init
   printf("memory used now: %d B\r\n", pikaMemNow());
   printf("memory used max: %d B\r\n", pikaMemMax());
 
+  // start shell and stay there
+  pikaScriptShell(pikaMain);
   // pikaScriptShell(pikaScriptInit());
-  /* USER CODE END 2 */
 
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-    HAL_Delay(1000);
-    obj_run(root, "led.on()");
-    HAL_Delay(1000);
-    obj_run(root, "led.off()");
-    /* USER CODE BEGIN 3 */
   }
-  /* USER CODE END 3 */
 }
 
 /**
