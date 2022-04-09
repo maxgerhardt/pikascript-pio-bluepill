@@ -1,4 +1,4 @@
-# PikaScript Bluepill Demo -- Python-like REPL on the UART 🐍🔌
+# PikaScript Bluepill Demo — Python-like REPL on the UART 🐍🔌
 
 ## Description
 
