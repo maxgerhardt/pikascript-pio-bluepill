@@ -49,7 +49,7 @@ Launching PikaScript shell.
 >>> 
 ```
 
-There is the special built-in `led` object that the firmware creates with `on()` and `off()` methods.
+There is the special built-in `led` object that the firmware creates with `on()` and `off()` methods for PC13.
 
 ```py
 >>> led.on()
