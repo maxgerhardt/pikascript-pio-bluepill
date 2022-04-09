@@ -26,7 +26,15 @@ The project opens a PikaScript shell on the UART console by calling into `pikaSc
 
 ## Output
 
-At 115200 baud at TX = PA9. RX (PA10) is unused.
+At 115200 baud at (from the bluepill's view) TX = PA9 and RX = PA10.
+
+Use e.g.
+```sh
+miniterm.py --eol LF COM6 115200
+```
+or any other serial terminal to establish a connection after flashing.
+
+Initial bootup messsages:
 
 ```
 ======[pikascript packages installed]======
