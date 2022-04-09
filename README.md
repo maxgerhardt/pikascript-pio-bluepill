@@ -1,5 +1,8 @@
 # PikaScript Bluepill Demo — Python-like REPL 🐍🔌
 
+![example workflow](https://github.com/maxgerhardt/pikascript-pio-bluepill/actions/workflows/build.yml/badge.svg) 
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/maxgerhardt/pikascript-pio-bluepill)](https://GitHub.com/maxgerhardt/pikascript-pio-bluepill/pulls/) [![GitHub issues](https://img.shields.io/github/issues/maxgerhardt/pikascript-pio-bluepill.svg)](https://GitHub.com/maxgerhardt/pikascript-pio-bluepill/issues/)
+
 ## Description
 
 Uses the sources from http://pikascript.com/ for stm32f103c8, with all versions set to "latest". See https://github.com/pikasTech/pikascript.
