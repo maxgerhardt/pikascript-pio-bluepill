@@ -89,4 +89,49 @@ Blinky code using the STM32F1 libary:
 >>> x.low()
 >>> x.high()
 ```
-Some aspects don't yet seem to work though: https://github.com/pikasTech/pikascript/issues
+
+**Remember to always use 4 spaces as indentation. Nothing else will work!!** 
+
+Basic loops:
+
+```py
+>>> for i in range(0,3):
+...     print(i)
+...
+0
+1
+2
+```
+
+```py
+>>> i = 0
+>>> while i != 3:
+...     print(i)
+...     i += 1
+...
+0
+1
+2
+```
+
+Lists by using the PikaStdData classes (**these are not built-in!!**), see [docs](https://pikadoc.readthedocs.io/en/latest/PikaStdData%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.html).
+
+```py
+>>> x = PikaStdData.List()
+>>> x.append(1)
+>>> x.append(2)
+>>> x.len()
+2
+>>> for elem in x:
+...     print(elem)
+...
+1
+2
+```
+
+## Known issues
+
+Some things don't yet work on the REPL: https://github.com/pikasTech/pikascript/issues
+  * Function definitions: https://github.com/pikasTech/pikascript/issues/98
+  * Class definitions: https://github.com/pikasTech/pikascript/issues/99
+  * Lists, dicts etc. are not built-in: https://github.com/pikasTech/pikascript/issues/97
