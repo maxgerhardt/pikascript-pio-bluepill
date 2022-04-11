@@ -1,0 +1,41 @@
+diff --git a/lib/pikascript-core/PikaObj.c b/lib/pikascript-core/PikaObj.c
+index 28bd6e1..30469e5 100644
+--- a/lib/pikascript-core/PikaObj.c
++++ b/lib/pikascript-core/PikaObj.c
+@@ -636,11 +636,16 @@ void obj_shellLineProcess(PikaObj* self,
+     char* rxBuff = args_getBuff(&buffs, PIKA_LINE_BUFF_SIZE);
+     char* input_line = NULL;
+     uint8_t is_in_block = 0;
+-    __platform_printf(cfg->prefix);
++    __platform_printf(cfg->prefix); fflush(stdout);
+     while (1) {
++        fflush(stdout); // flush anything that is buffered to the terminal before reading new char
+         char inputChar = __platform_getchar();
+ #ifndef __linux
+-        __platform_printf("%c", inputChar);
++        if (inputChar == '\r')
++            __platform_printf("\n");
++        else
++            __platform_printf("%c", inputChar);
++        fflush(stdout); //actually flush character to terminal
+ #endif
+         if ((inputChar == '\b') || (inputChar == 127)) {
+             uint32_t size = strGetSize(rxBuff);
+@@ -658,7 +663,7 @@ void obj_shellLineProcess(PikaObj* self,
+         }
+         if ((inputChar == '\r') || (inputChar == '\n')) {
+ #ifndef __linux
+-            __platform_printf("\r\n");
++            //__platform_printf("\r\n");
+ #endif
+             /* still in block */
+             if (is_in_block) {
+@@ -701,7 +706,7 @@ void obj_shellLineProcess(PikaObj* self,
+             if (SHELL_STATE_EXIT == __lineHandler_fun(self, input_line)) {
+                 break;
+             }
+-            __platform_printf(cfg->prefix);
++            __platform_printf(cfg->prefix); fflush(stdout);
+ 
+             __clearBuff(rxBuff, PIKA_LINE_BUFF_SIZE);
+             continue;
