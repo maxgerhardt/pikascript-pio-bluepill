@@ -140,9 +140,32 @@ Lists by using the PikaStdData classes (**these are not built-in!!**), see [docs
 2
 ```
 
+Function definitions:
+
+```py
+>>> def a():
+...     print("A")
+... 
+>>> a()
+A
+```
+
+Class definitions:
+
+```py
+>>> class MyClass(TinyObj):
+...     def __init__(self):
+...         self.val = 123
+... 
+>>> x = MyClass()
+>>> x.val
+123
+>>> 
+```
+
 ## Known issues
 
 Some things don't yet work on the REPL: https://github.com/pikasTech/pikascript/issues
-  * Function definitions: https://github.com/pikasTech/pikascript/issues/98
-  * Class definitions: https://github.com/pikasTech/pikascript/issues/99
+  * ~~Function definitions: https://github.com/pikasTech/pikascript/issues/98~~
+  * ~~Class definitions: https://github.com/pikasTech/pikascript/issues/99~~
   * Lists, dicts etc. are not built-in: https://github.com/pikasTech/pikascript/issues/97
