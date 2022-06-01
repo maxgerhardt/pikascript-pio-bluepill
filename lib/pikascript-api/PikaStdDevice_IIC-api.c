@@ -42,7 +42,7 @@ void PikaStdDevice_IIC_platformWriteMethod(PikaObj *self, Args *args){
 void PikaStdDevice_IIC_readMethod(PikaObj *self, Args *args){
     int addr = args_getInt(args, "addr");
     int length = args_getInt(args, "length");
-    char * res = PikaStdDevice_IIC_read(self, addr, length);
+    char* res = PikaStdDevice_IIC_read(self, addr, length);
     method_returnStr(args, res);
 }
 
@@ -52,18 +52,18 @@ void PikaStdDevice_IIC_setDeviceAddrMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_IIC_setPinSCLMethod(PikaObj *self, Args *args){
-    char * pin = args_getStr(args, "pin");
+    char* pin = args_getStr(args, "pin");
     PikaStdDevice_IIC_setPinSCL(self, pin);
 }
 
 void PikaStdDevice_IIC_setPinSDAMethod(PikaObj *self, Args *args){
-    char * pin = args_getStr(args, "pin");
+    char* pin = args_getStr(args, "pin");
     PikaStdDevice_IIC_setPinSDA(self, pin);
 }
 
 void PikaStdDevice_IIC_writeMethod(PikaObj *self, Args *args){
     int addr = args_getInt(args, "addr");
-    char * data = args_getStr(args, "data");
+    char* data = args_getStr(args, "data");
     PikaStdDevice_IIC_write(self, addr, data);
 }
 

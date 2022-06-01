@@ -28,30 +28,19 @@
 #ifndef _Process__H
 #define _Process__H
 
-/*! \NOTE: Make sure #include "plooc_class.h" is close to the class definition
- */
-//#define __PLOOC_CLASS_USE_STRICT_TEMPLATE__
-
-#if defined(__PIKA_OBJ_CLASS_IMPLEMENT)
-#define __PLOOC_CLASS_IMPLEMENT__
-#elif defined(__PIKA_OBJ_CLASS_INHERIT__)
-#define __PLOOC_CLASS_INHERIT__
-#endif
-
-#include "__pika_ooc.h"
-
 #include "dataArgs.h"
 #include "dataLink.h"
 #include "dataMemory.h"
 
-typedef struct InstructUnit_t {
+typedef struct InstructUnit InstructUnit;
+struct InstructUnit {
     uint8_t deepth;
     uint8_t isNewLine_instruct;
     uint16_t const_pool_index;
-} InstructUnit;
+};
 
-typedef struct ConstPool_t ConstPool;
-struct ConstPool_t {
+typedef struct ConstPool ConstPool;
+struct ConstPool {
     Arg* arg_buff;
     uint16_t content_offset_now;
     uint16_t size;
@@ -60,8 +49,8 @@ struct ConstPool_t {
     FILE* output_f;
 };
 
-typedef struct InstructArray_t InstructArray;
-struct InstructArray_t {
+typedef struct InstructArray InstructArray;
+struct InstructArray {
     Arg* arg_buff;
     uint16_t content_offset_now;
     uint16_t size;
@@ -70,29 +59,34 @@ struct InstructArray_t {
     FILE* output_f;
 };
 
-typedef struct ByteCodeFrame_t {
+typedef struct ByteCodeFrame ByteCodeFrame;
+struct ByteCodeFrame {
     ConstPool const_pool;
     InstructArray instruct_array;
-} ByteCodeFrame;
+};
 
-typedef struct PikaObj_t {
-    /* list */
+typedef struct PikaObj PikaObj;
+struct PikaObj {
     Args* list;
-} PikaObj;
+};
 
 typedef PikaObj* (*NewFun)(Args* args);
 typedef PikaObj* (*InitFun)(PikaObj* self, Args* args);
 typedef PikaObj VMParameters;
 typedef void (*Method)(PikaObj* self, Args* args);
 
-typedef struct MethodInfo_t {
+typedef struct MethodInfo MethodInfo;
+struct MethodInfo {
     char* name;
     char* dec;
     char* ptr;
     char* pars;
     ArgType type;
     ByteCodeFrame* bytecode_frame;
-} MethodInfo;
+};
+
+typedef PikaObj LibObj;
+typedef PikaObj PikaMaker;
 
 /* operation */
 int32_t obj_deinit(PikaObj* self);
@@ -103,25 +97,22 @@ int32_t obj_disable(PikaObj* self);
 
 // arg type operations
 int32_t obj_setInt(PikaObj* self, char* argPath, int64_t val);
+int32_t obj_setRef(PikaObj* self, char* argPath, void* pointer);
 int32_t obj_setPtr(PikaObj* self, char* argPath, void* pointer);
 int32_t obj_setFloat(PikaObj* self, char* argPath, float value);
 int32_t obj_setStr(PikaObj* self, char* argPath, char* str);
 int32_t obj_setArg(PikaObj* self, char* argPath, Arg* arg);
 int32_t obj_setArg_noCopy(PikaObj* self, char* argPath, Arg* arg);
+int32_t obj_setBytes(PikaObj* self, char* argPath, uint8_t* src, size_t size);
 
 void* obj_getPtr(PikaObj* self, char* argPath);
 float obj_getFloat(PikaObj* self, char* argPath);
 char* obj_getStr(PikaObj* self, char* argPath);
 int64_t obj_getInt(PikaObj* self, char* argPath);
 Arg* obj_getArg(PikaObj* self, char* argPath);
-
-// arg general operations
-int32_t obj_bind(PikaObj* self, char* type, char* name, void* pointer);
-int32_t obj_set(PikaObj* self, char* name, char* valStr);
-
-int32_t obj_bindInt(PikaObj* self, char* name, int32_t* valPtr);
-int32_t obj_bindFloat(PikaObj* self, char* name, float* valPtr);
-int32_t obj_bindString(PikaObj* self, char* name, char** valPtr);
+uint8_t* obj_getBytes(PikaObj* self, char* argPath);
+size_t obj_getBytesSize(PikaObj* self, char* argPath);
+size_t obj_loadBytes(PikaObj* self, char* argPath, uint8_t* out_buff);
 
 char* obj_print(PikaObj* self, char* name);
 
@@ -130,11 +121,8 @@ int32_t obj_load(PikaObj* self, Args* args, char* name);
 
 // subObject
 int32_t obj_addOther(PikaObj* self, char* subObjectName, void* new_projcetFun);
-int32_t obj_setObjWithoutClass(PikaObj* self,
-                               char* subObjectName,
-                               void* new_projcetFun);
-PikaObj* obj_getObjDirect(PikaObj* self, char* name);
-PikaObj* obj_getObj(PikaObj* self, char* processPathectory, int32_t deepth);
+PikaObj* obj_getObj(PikaObj* self, char* objPath);
+PikaObj* obj_getHostObj(PikaObj* self, char* objPath);
 
 // subProcess
 int32_t obj_freeObj(PikaObj* self, char* subObjectName);
@@ -177,10 +165,6 @@ int32_t args_getErrorCode(Args* args);
 void args_setSysOut(Args* args, char* str);
 char* obj_getSysOut(PikaObj* self);
 void obj_sysPrintf(PikaObj* self, char* fmt, ...);
-uint8_t obj_getRefArg(PikaObj* self,
-                      char* targetArgName,
-                      char* sourceArgPath,
-                      Args* targetArgs);
 uint8_t obj_getAnyArg(PikaObj* self,
                       char* targetArgName,
                       char* sourceArgPath,
@@ -230,8 +214,37 @@ void obj_shellLineProcess(PikaObj* self,
 int pikaCompile(char* output_file_name, char* py_lines);
 Method obj_getNativeMethod(PikaObj* self, char* method_name);
 void obj_runNativeMethod(PikaObj* self, char* method_name, Args* args);
-Arg* newFreeObjArg(NewFun newObjFun);
 Arg* obj_newObjInPackage(NewFun newObjFun);
+
+void obj_refcntInc(PikaObj* self);
+void obj_refcntDec(PikaObj* self);
+int obj_refcntNow(PikaObj* self);
+PikaObj* NewObjDirect(NewFun newObjFun);
+Arg* arg_setRef(Arg* self, char* name, PikaObj* obj);
+Arg* arg_setWeakRef(Arg* self, char* name, PikaObj* obj);
+
+PikaObj* obj_importModuleWithByteCodeFrame(PikaObj* self,
+                                           char* name,
+                                           ByteCodeFrame* bytecode_frame);
+PikaObj* obj_importModuleWithByteCode(PikaObj* self,
+                                      char* name,
+                                      uint8_t* byteCode);
+
+int32_t obj_newObj(PikaObj* self,
+                   char* objName,
+                   char* className,
+                   NewFun newFunPtr);
+
+Arg* arg_newMetaObj(NewFun objPtr);
+PikaObj* obj_linkLibObj(PikaObj* self, LibObj* library);
+PikaObj* obj_linkLibrary(PikaObj* self, uint8_t* library_bytes);
+int obj_importModule(PikaObj* self, char* module_name);
+int32_t obj_newMetaObj(PikaObj* self, char* objName, NewFun newFunPtr);
+int32_t obj_newDirectObj(PikaObj* self, char* objName, NewFun newFunPtr);
+int obj_runModule(PikaObj* self, char* module_name);
+char* obj_toStr(PikaObj* self);
+void obj_runCharInit(PikaObj* self);
+enum shell_state obj_runChar(PikaObj* self, char inputChar);
 
 #define PIKA_PYTHON_BEGIN
 #define PIKA_PYTHON(x)

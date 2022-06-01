@@ -41,7 +41,7 @@ void PikaStdDevice_UART_platformWriteMethod(PikaObj *self, Args *args){
 
 void PikaStdDevice_UART_readMethod(PikaObj *self, Args *args){
     int length = args_getInt(args, "length");
-    char * res = PikaStdDevice_UART_read(self, length);
+    char* res = PikaStdDevice_UART_read(self, length);
     method_returnStr(args, res);
 }
 
@@ -56,7 +56,7 @@ void PikaStdDevice_UART_setIdMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_UART_writeMethod(PikaObj *self, Args *args){
-    char * data = args_getStr(args, "data");
+    char* data = args_getStr(args, "data");
     PikaStdDevice_UART_write(self, data);
 }
 

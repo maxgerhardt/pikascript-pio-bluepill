@@ -17,6 +17,6 @@ void PikaStdDevice_ADC_platformDisable(PikaObj *self);
 void PikaStdDevice_ADC_platformEnable(PikaObj *self);
 void PikaStdDevice_ADC_platformRead(PikaObj *self);
 float PikaStdDevice_ADC_read(PikaObj *self);
-void PikaStdDevice_ADC_setPin(PikaObj *self, char * pin);
+void PikaStdDevice_ADC_setPin(PikaObj *self, char* pin);
 
 #endif

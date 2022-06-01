@@ -9,6 +9,6 @@
 
 PikaObj *New_PikaDebug(Args *args);
 
-Arg * PikaDebug_Debuger(PikaObj *self);
+Arg* PikaDebug_Debuger(PikaObj *self);
 
 #endif

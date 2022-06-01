@@ -9,6 +9,6 @@
 
 PikaObj *New_PikaStdTask(Args *args);
 
-Arg * PikaStdTask_Task(PikaObj *self);
+Arg* PikaStdTask_Task(PikaObj *self);
 
 #endif

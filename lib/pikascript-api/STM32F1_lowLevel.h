@@ -9,6 +9,6 @@
 
 PikaObj *New_STM32F1_lowLevel(Args *args);
 
-int STM32F1_lowLevel_readPin(PikaObj *self, char * pin);
+int STM32F1_lowLevel_readPin(PikaObj *self, char* pin);
 
 #endif

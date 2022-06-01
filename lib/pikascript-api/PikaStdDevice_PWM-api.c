@@ -35,7 +35,7 @@ void PikaStdDevice_PWM_getFrequencyMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_PWM_getNameMethod(PikaObj *self, Args *args){
-    char * res = PikaStdDevice_PWM_getName(self);
+    char* res = PikaStdDevice_PWM_getName(self);
     method_returnStr(args, res);
 }
 
@@ -80,12 +80,12 @@ void PikaStdDevice_PWM_setFrequencyMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_PWM_setNameMethod(PikaObj *self, Args *args){
-    char * name = args_getStr(args, "name");
+    char* name = args_getStr(args, "name");
     PikaStdDevice_PWM_setName(self, name);
 }
 
 void PikaStdDevice_PWM_setPinMethod(PikaObj *self, Args *args){
-    char * pin = args_getStr(args, "pin");
+    char* pin = args_getStr(args, "pin");
     PikaStdDevice_PWM_setPin(self, pin);
 }
 

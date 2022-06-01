@@ -3,7 +3,7 @@
 #include "PikaStdLib_SysObj.h"
 
 Arg* PikaStdData_Dict_get(PikaObj* self, char* key) {
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     return arg_copy(obj_getArg(pyload, key));
 }
 
@@ -12,25 +12,31 @@ void PikaStdData_Dict___init__(PikaObj* self) {
 }
 
 void PikaStdData_Dict_set(PikaObj* self, Arg* arg, char* key) {
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     obj_setArg(pyload, key, arg);
 }
 
 void PikaStdData_Dict_remove(PikaObj* self, char* key) {
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     obj_removeArg(pyload, key);
 }
 
 Arg* PikaStdData_Dict___iter__(PikaObj* self) {
     obj_setInt(self, "__iter_i", 0);
-    return arg_setPtr(NULL, "", ARG_TYPE_POINTER, self);
+    return arg_setRef(NULL, "", self);
 }
 
 Arg* PikaStdData_Dict___next__(PikaObj* self) {
     int __iter_i = args_getInt(self->list, "__iter_i");
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     Arg* res = arg_copy(args_getArg_index(pyload->list, __iter_i));
+    /* skip pointer */
     if (ARG_TYPE_POINTER == arg_getType(res)) {
+        arg_deinit(res);
+        return arg_setNull(NULL);
+    }
+    /* skip _refcnt */
+    if (hash_time33("_refcnt") == arg_getNameHash(res)) {
         arg_deinit(res);
         return arg_setNull(NULL);
     }

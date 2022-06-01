@@ -9,6 +9,6 @@
 
 PikaObj *New_PikaStdLib_RangeObj(Args *args);
 
-Arg * PikaStdLib_RangeObj___next__(PikaObj *self);
+Arg* PikaStdLib_RangeObj___next__(PikaObj *self);
 
 #endif

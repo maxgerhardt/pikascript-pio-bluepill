@@ -25,12 +25,12 @@ void PikaStdDevice_GPIO_getIdMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_GPIO_getModeMethod(PikaObj *self, Args *args){
-    char * res = PikaStdDevice_GPIO_getMode(self);
+    char* res = PikaStdDevice_GPIO_getMode(self);
     method_returnStr(args, res);
 }
 
 void PikaStdDevice_GPIO_getPinMethod(PikaObj *self, Args *args){
-    char * res = PikaStdDevice_GPIO_getPin(self);
+    char* res = PikaStdDevice_GPIO_getPin(self);
     method_returnStr(args, res);
 }
 
@@ -81,17 +81,17 @@ void PikaStdDevice_GPIO_setIdMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_GPIO_setModeMethod(PikaObj *self, Args *args){
-    char * mode = args_getStr(args, "mode");
+    char* mode = args_getStr(args, "mode");
     PikaStdDevice_GPIO_setMode(self, mode);
 }
 
 void PikaStdDevice_GPIO_setPinMethod(PikaObj *self, Args *args){
-    char * pinName = args_getStr(args, "pinName");
+    char* pinName = args_getStr(args, "pinName");
     PikaStdDevice_GPIO_setPin(self, pinName);
 }
 
 void PikaStdDevice_GPIO_setPullMethod(PikaObj *self, Args *args){
-    char * pull = args_getStr(args, "pull");
+    char* pull = args_getStr(args, "pull");
     PikaStdDevice_GPIO_setPull(self, pull);
 }
 

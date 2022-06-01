@@ -8,7 +8,7 @@
 #include "BaseObj.h"
 
 void PikaStdLib_StringObj___next__Method(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_StringObj___next__(self);
+    Arg* res = PikaStdLib_StringObj___next__(self);
     method_returnArg(args, res);
 }
 

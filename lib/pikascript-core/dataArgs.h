@@ -64,6 +64,7 @@ int32_t args_setFloatWithDefaultName(Args* self, float argFloat);
 int32_t args_setFloat(Args* self, char* name, float argFloat);
 float args_getFloat(Args* self, char* name);
 
+int32_t args_setRef(Args* self, char* name, void* argPointer);
 int32_t args_setPtr(Args* self, char* name, void* argPointer);
 void* args_getPtr(Args* self, char* name);
 
@@ -115,6 +116,9 @@ int args_pushArg(Args* self, Arg* arg);
 Arg* args_getArg_index(Args* self, int index);
 void* args_getHeapStruct(Args* self, char* name);
 int32_t args_removeArg_notDeinitArg(Args* self, Arg* argNow);
+uint8_t* args_getBytes(Args* self, char* name);
+void args_setBytes(Args* self, char* name, uint8_t* src, size_t size);
+size_t args_getBytesSize(Args* self, char* name);
 
 Args* New_args(Args* args);
 #endif

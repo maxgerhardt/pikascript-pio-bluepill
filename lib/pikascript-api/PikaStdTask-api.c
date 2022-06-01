@@ -8,7 +8,7 @@
 #include "BaseObj.h"
 
 void PikaStdTask_TaskMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdTask_Task(self);
+    Arg* res = PikaStdTask_Task(self);
     method_returnArg(args, res);
 }
 

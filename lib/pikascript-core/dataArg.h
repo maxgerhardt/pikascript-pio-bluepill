@@ -27,6 +27,7 @@
 
 #ifndef _arg__H
 #define _arg__H
+
 #include "dataLink.h"
 #include "dataMemory.h"
 
@@ -34,68 +35,47 @@ typedef uint32_t Hash;
 typedef enum {
     ARG_TYPE_UNDEF = 0,
     ARG_TYPE_NONE,
-    ARG_TYPE_VOID,
     ARG_TYPE_NULL,
+    ARG_TYPE_VOID,
     ARG_TYPE_INT,
     ARG_TYPE_FLOAT,
-    ARG_TYPE_POINTER,
     ARG_TYPE_STRING,
+    ARG_TYPE_BYTES,
+    ARG_TYPE_POINTER,
     ARG_TYPE_OBJECT,
-    ARG_TYPE_MATE_OBJECT,
-    ARG_TYPE_FREE_OBJECT,
-    ARG_TYPE_NATIVE_METHOD,
-    ARG_TYPE_NATIVE_CONSTRUCTOR_METHOD,
-    ARG_TYPE_CONSTRUCTOR_METHOD,
-    ARG_TYPE_OBJECT_METHOD,
-    ARG_TYPE_STATIC_METHOD,
+    ARG_TYPE_OBJECT_META,
+    ARG_TYPE_OBJECT_NEW,
+    ARG_TYPE_METHOD_NATIVE,
+    ARG_TYPE_METHOD_NATIVE_CONSTRUCTOR,
+    ARG_TYPE_METHOD_CONSTRUCTOR,
+    ARG_TYPE_METHOD_OBJECT,
+    ARG_TYPE_METHOD_STATIC,
     ARG_TYPE_STRUCT,
-    ARG_TYPE_HEAP_STRUCT,
+    ARG_TYPE_STRUCT_HEAP,
 } ArgType;
 
 typedef void (*StructDeinitFun)(void* struct_);
 
-typedef struct __arg __arg;
-struct __arg {
-    __arg* next;
+typedef struct Arg Arg;
+struct Arg {
+    Arg* next;
     uint16_t size;
     uint8_t type;
-    uint8_t __rsvd;
+    uint8_t ref_cnt;
     Hash name_hash;
     uint8_t content[];
 };
 
-typedef uint8_t Arg;
-
-// uint32_t content_getNameHash(uint8_t* content);
-#define content_getNameHash(__addr) (((__arg*)(__addr))->name_hash)
-
-ArgType content_getType(uint8_t* self);
-
-#define content_getNext(__addr) ((uint8_t*)(((__arg*)(__addr))->next))
-
-#define content_getSize(__addr) ((uint16_t)(((__arg*)(__addr))->size))
-
-#define content_getContent(__addr) (((__arg*)(__addr))->content)
-
-uint16_t content_totleSize(uint8_t* self);
-
-uint8_t* content_deinit(uint8_t* self);
-
-uint8_t* content_setName(uint8_t* self, char* name);
-uint8_t* content_setType(uint8_t* self, ArgType type);
-uint8_t* content_setContent(uint8_t* self, uint8_t* content, uint16_t size);
-// void content_setNext(uint8_t* self, uint8_t* next);
-
-#define content_setNext(__addr, __next)                \
-    do {                                               \
-        (((__arg*)(__addr))->next) = (__arg*)(__next); \
-    } while (0)
-
+Arg* arg_getNext(Arg* self);
+uint16_t arg_getSize(Arg* self);
+uint8_t* arg_getContent(Arg* self);
+uint16_t arg_totleSize(Arg* self);
+void arg_setNext(Arg* self, Arg* next);
 uint16_t arg_getTotleSize(Arg* self);
 void arg_freeContent(Arg* self);
 
 Arg* arg_setName(Arg* self, char* name);
-Arg* arg_setContent(Arg* self, uint8_t* content, uint32_t size);
+Arg* arg_setContent(Arg* self, uint8_t* content, uint16_t size);
 Arg* arg_newContent(Arg* self, uint32_t size);
 Arg* arg_setType(Arg* self, ArgType type);
 Hash arg_getNameHash(Arg* self);
@@ -113,11 +93,11 @@ int64_t arg_getInt(Arg* self);
 float arg_getFloat(Arg* self);
 void* arg_getPtr(Arg* self);
 char* arg_getStr(Arg* self);
+uint8_t* arg_getBytes(Arg* self);
+size_t arg_getBytesSize(Arg* self);
 Arg* arg_copy(Arg* argToBeCopy);
 
-#define arg_getContent(self) ((uint8_t*)content_getContent((self)))
-
-Arg* arg_init(Arg* self, void* voidPointer);
+uint8_t* arg_getContent(Arg* self);
 void arg_deinit(Arg* self);
 
 Arg* New_arg(void* voidPointer);
@@ -133,5 +113,8 @@ Arg* arg_setHeapStruct(Arg* self,
                        void* struct_deinit_fun);
 void* arg_getHeapStruct(Arg* self);
 void arg_deinitHeap(Arg* self);
+Arg* arg_setBytes(Arg* self, char* name, uint8_t* src, size_t size);
+void arg_printBytes(Arg* self);
+Arg* arg_loadFile(Arg* self, char* filename);
 
 #endif

@@ -41,7 +41,7 @@ void PikaStdDevice_ADC_readMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdDevice_ADC_setPinMethod(PikaObj *self, Args *args){
-    char * pin = args_getStr(args, "pin");
+    char* pin = args_getStr(args, "pin");
     PikaStdDevice_ADC_setPin(self, pin);
 }
 

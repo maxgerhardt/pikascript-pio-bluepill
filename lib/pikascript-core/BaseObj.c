@@ -25,33 +25,12 @@
  * SOFTWARE.
  */
 
-#define __PIKA_OBJ_CLASS_IMPLEMENT
-
 #include "BaseObj.h"
 #include "PikaObj.h"
 #include "TinyObj.h"
 #include "dataMemory.h"
 #include "dataString.h"
 #include "dataStrs.h"
-
-Arg* arg_setMetaObj(char* objName, char* className, NewFun objPtr) {
-    Args buffs = {0};
-    Arg* argNew = New_arg(NULL);
-    /* m means mate-object */
-    argNew = arg_setPtr(argNew, objName, ARG_TYPE_MATE_OBJECT, (void*)objPtr);
-    strsDeinit(&buffs);
-    return argNew;
-}
-
-int32_t obj_newObj(PikaObj* self,
-                   char* objName,
-                   char* className,
-                   NewFun newFunPtr) {
-    /* add mate Obj, no inited */
-    Arg* mateObj = arg_setMetaObj(objName, className, newFunPtr);
-    args_setArg(self->list, mateObj);
-    return 0;
-}
 
 static void print_no_end(PikaObj* self, Args* args) {
     obj_setErrorCode(self, 0);
@@ -70,8 +49,23 @@ static void print_no_end(PikaObj* self, Args* args) {
     __platform_printf("%s", res);
 }
 
-void baseobj_print(PikaObj* self, Args* args) {
+void Baseobj_print(PikaObj* self, Args* args) {
     obj_setErrorCode(self, 0);
+    Arg* arg = args_getArg(args, "val");
+    ArgType arg_type = arg_getType(arg);
+    if (NULL != arg) {
+        if (arg_getType(arg) == ARG_TYPE_BYTES) {
+            arg_printBytes(arg);
+            return;
+        }
+    }
+    if (ARG_TYPE_OBJECT == arg_type) {
+        char* to_str = obj_toStr(arg_getPtr(arg));
+        if (NULL != to_str) {
+            __platform_printf("%s\r\n", to_str);
+            return;
+        }
+    }
     char* res = args_print(args, "val");
     if (NULL == res) {
         obj_setSysOut(self, "[error] print: can not print val");
@@ -89,7 +83,7 @@ void baseobj_print(PikaObj* self, Args* args) {
 
 PikaObj* New_BaseObj(Args* args) {
     PikaObj* self = New_TinyObj(args);
-    class_defineMethod(self, "print(val:any)", baseobj_print);
+    class_defineMethod(self, "print(val:any)", Baseobj_print);
     class_defineMethod(self, "printNoEnd(val:any)", print_no_end);
     return self;
 }

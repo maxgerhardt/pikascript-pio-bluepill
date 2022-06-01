@@ -9,9 +9,10 @@
 
 PikaObj *New_PikaStdData(Args *args);
 
-Arg * PikaStdData_ByteArray(PikaObj *self);
-Arg * PikaStdData_Dict(PikaObj *self);
-Arg * PikaStdData_List(PikaObj *self);
-Arg * PikaStdData_String(PikaObj *self);
+Arg* PikaStdData_ByteArray(PikaObj *self);
+Arg* PikaStdData_Dict(PikaObj *self);
+Arg* PikaStdData_List(PikaObj *self);
+Arg* PikaStdData_String(PikaObj *self);
+Arg* PikaStdData_Utils(PikaObj *self);
 
 #endif

@@ -9,6 +9,6 @@
 
 PikaObj *New_PikaStdData_ByteArray(Args *args);
 
-void PikaStdData_ByteArray_fromString(PikaObj *self, char * s);
+void PikaStdData_ByteArray_fromString(PikaObj *self, char* s);
 
 #endif
