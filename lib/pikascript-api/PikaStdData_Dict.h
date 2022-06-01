@@ -9,13 +9,13 @@
 
 PikaObj *New_PikaStdData_Dict(Args *args);
 
-Arg * PikaStdData_Dict___get__(PikaObj *self, Arg * __key);
+Arg* PikaStdData_Dict___get__(PikaObj *self, Arg* __key);
 void PikaStdData_Dict___init__(PikaObj *self);
-Arg * PikaStdData_Dict___iter__(PikaObj *self);
-Arg * PikaStdData_Dict___next__(PikaObj *self);
-void PikaStdData_Dict___set__(PikaObj *self, Arg * __key, Arg * __val);
-Arg * PikaStdData_Dict_get(PikaObj *self, char * key);
-void PikaStdData_Dict_remove(PikaObj *self, char * key);
-void PikaStdData_Dict_set(PikaObj *self, Arg * arg, char * key);
+Arg* PikaStdData_Dict___iter__(PikaObj *self);
+Arg* PikaStdData_Dict___next__(PikaObj *self);
+void PikaStdData_Dict___set__(PikaObj *self, Arg* __key, Arg* __val);
+Arg* PikaStdData_Dict_get(PikaObj *self, char* key);
+void PikaStdData_Dict_remove(PikaObj *self, char* key);
+void PikaStdData_Dict_set(PikaObj *self, Arg* arg, char* key);
 
 #endif

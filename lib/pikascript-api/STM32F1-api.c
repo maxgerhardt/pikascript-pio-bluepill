@@ -8,37 +8,37 @@
 #include "BaseObj.h"
 
 void STM32F1_ADCMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_ADC(self);
+    Arg* res = STM32F1_ADC(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_GPIOMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_GPIO(self);
+    Arg* res = STM32F1_GPIO(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_IICMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_IIC(self);
+    Arg* res = STM32F1_IIC(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_PWMMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_PWM(self);
+    Arg* res = STM32F1_PWM(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_TimeMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_Time(self);
+    Arg* res = STM32F1_Time(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_UARTMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_UART(self);
+    Arg* res = STM32F1_UART(self);
     method_returnArg(args, res);
 }
 
 void STM32F1_lowLevelMethod(PikaObj *self, Args *args){
-    Arg * res = STM32F1_lowLevel(self);
+    Arg* res = STM32F1_lowLevel(self);
     method_returnArg(args, res);
 }
 

@@ -25,6 +25,7 @@
  * SOFTWARE.
  */
 
+#define __DATA_MEMORY_CLASS_IMPLEMENT__
 #include "dataMemory.h"
 #include "PikaPlatform.h"
 
@@ -47,7 +48,7 @@ void* pikaMalloc(uint32_t size) {
         pikaMemInfo.heapUsedMax = pikaMemInfo.heapUsed;
     }
     __platform_disable_irq_handle();
-    void* mem = __platform_malloc(size);
+    void* mem = __user_malloc(size);
     __platform_enable_irq_handle();
     if (NULL == mem) {
         __platform_printf(
@@ -70,7 +71,7 @@ void pikaFree(void* mem, uint32_t size) {
 #endif
 
     __platform_disable_irq_handle();
-    __platform_free(mem);
+    __user_free(mem, size);
     __platform_enable_irq_handle();
     pikaMemInfo.heapUsed -= size;
 }
@@ -117,7 +118,7 @@ void pool_deinit(Pool* pool) {
     bitmap_deinit(pool->bitmap);
 }
 
-void* pool_getMem_byBlockIndex(Pool* pool, uint32_t block_index) {
+void* pool_getBytes_byBlockIndex(Pool* pool, uint32_t block_index) {
     return pool->mem + block_index * pool->aline;
 }
 
@@ -212,7 +213,7 @@ found:
         pool->purl_free_block_start = block_index + 1;
     }
     /* return mem by block index */
-    return pool_getMem_byBlockIndex(pool, block_index - block_num_need + 1);
+    return pool_getBytes_byBlockIndex(pool, block_index - block_num_need + 1);
 }
 
 void pool_free(Pool* pool, void* mem, uint32_t size) {

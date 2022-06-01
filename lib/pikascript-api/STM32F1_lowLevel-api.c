@@ -8,7 +8,7 @@
 #include "BaseObj.h"
 
 void STM32F1_lowLevel_readPinMethod(PikaObj *self, Args *args){
-    char * pin = args_getStr(args, "pin");
+    char* pin = args_getStr(args, "pin");
     int res = STM32F1_lowLevel_readPin(self, pin);
     method_returnInt(args, res);
 }

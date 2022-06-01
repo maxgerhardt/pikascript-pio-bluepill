@@ -8,8 +8,8 @@
 #include "BaseObj.h"
 
 void PikaStdData_Dict___get__Method(PikaObj *self, Args *args){
-    Arg * __key = args_getArg(args, "__key");
-    Arg * res = PikaStdData_Dict___get__(self, __key);
+    Arg* __key = args_getArg(args, "__key");
+    Arg* res = PikaStdData_Dict___get__(self, __key);
     method_returnArg(args, res);
 }
 
@@ -18,35 +18,35 @@ void PikaStdData_Dict___init__Method(PikaObj *self, Args *args){
 }
 
 void PikaStdData_Dict___iter__Method(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_Dict___iter__(self);
+    Arg* res = PikaStdData_Dict___iter__(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_Dict___next__Method(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_Dict___next__(self);
+    Arg* res = PikaStdData_Dict___next__(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_Dict___set__Method(PikaObj *self, Args *args){
-    Arg * __key = args_getArg(args, "__key");
-    Arg * __val = args_getArg(args, "__val");
+    Arg* __key = args_getArg(args, "__key");
+    Arg* __val = args_getArg(args, "__val");
     PikaStdData_Dict___set__(self, __key, __val);
 }
 
 void PikaStdData_Dict_getMethod(PikaObj *self, Args *args){
-    char * key = args_getStr(args, "key");
-    Arg * res = PikaStdData_Dict_get(self, key);
+    char* key = args_getStr(args, "key");
+    Arg* res = PikaStdData_Dict_get(self, key);
     method_returnArg(args, res);
 }
 
 void PikaStdData_Dict_removeMethod(PikaObj *self, Args *args){
-    char * key = args_getStr(args, "key");
+    char* key = args_getStr(args, "key");
     PikaStdData_Dict_remove(self, key);
 }
 
 void PikaStdData_Dict_setMethod(PikaObj *self, Args *args){
-    Arg * arg = args_getArg(args, "arg");
-    char * key = args_getStr(args, "key");
+    Arg* arg = args_getArg(args, "arg");
+    char* key = args_getStr(args, "key");
     PikaStdData_Dict_set(self, arg, key);
 }
 

@@ -8,8 +8,8 @@
 #include "BaseObj.h"
 
 void PikaStdData_List___get__Method(PikaObj *self, Args *args){
-    Arg * __key = args_getArg(args, "__key");
-    Arg * res = PikaStdData_List___get__(self, __key);
+    Arg* __key = args_getArg(args, "__key");
+    Arg* res = PikaStdData_List___get__(self, __key);
     method_returnArg(args, res);
 }
 
@@ -18,29 +18,29 @@ void PikaStdData_List___init__Method(PikaObj *self, Args *args){
 }
 
 void PikaStdData_List___iter__Method(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_List___iter__(self);
+    Arg* res = PikaStdData_List___iter__(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_List___next__Method(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_List___next__(self);
+    Arg* res = PikaStdData_List___next__(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_List___set__Method(PikaObj *self, Args *args){
-    Arg * __key = args_getArg(args, "__key");
-    Arg * __val = args_getArg(args, "__val");
+    Arg* __key = args_getArg(args, "__key");
+    Arg* __val = args_getArg(args, "__val");
     PikaStdData_List___set__(self, __key, __val);
 }
 
 void PikaStdData_List_appendMethod(PikaObj *self, Args *args){
-    Arg * arg = args_getArg(args, "arg");
+    Arg* arg = args_getArg(args, "arg");
     PikaStdData_List_append(self, arg);
 }
 
 void PikaStdData_List_getMethod(PikaObj *self, Args *args){
     int i = args_getInt(args, "i");
-    Arg * res = PikaStdData_List_get(self, i);
+    Arg* res = PikaStdData_List_get(self, i);
     method_returnArg(args, res);
 }
 
@@ -50,7 +50,7 @@ void PikaStdData_List_lenMethod(PikaObj *self, Args *args){
 }
 
 void PikaStdData_List_setMethod(PikaObj *self, Args *args){
-    Arg * arg = args_getArg(args, "arg");
+    Arg* arg = args_getArg(args, "arg");
     int i = args_getInt(args, "i");
     PikaStdData_List_set(self, arg, i);
 }

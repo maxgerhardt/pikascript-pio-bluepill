@@ -8,27 +8,27 @@
 #include "BaseObj.h"
 
 void PikaStdLib_MemCheckerMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_MemChecker(self);
+    Arg* res = PikaStdLib_MemChecker(self);
     method_returnArg(args, res);
 }
 
 void PikaStdLib_PikaObjMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_PikaObj(self);
+    Arg* res = PikaStdLib_PikaObj(self);
     method_returnArg(args, res);
 }
 
 void PikaStdLib_RangeObjMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_RangeObj(self);
+    Arg* res = PikaStdLib_RangeObj(self);
     method_returnArg(args, res);
 }
 
 void PikaStdLib_StringObjMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_StringObj(self);
+    Arg* res = PikaStdLib_StringObj(self);
     method_returnArg(args, res);
 }
 
 void PikaStdLib_SysObjMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdLib_SysObj(self);
+    Arg* res = PikaStdLib_SysObj(self);
     method_returnArg(args, res);
 }
 

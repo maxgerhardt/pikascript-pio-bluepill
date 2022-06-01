@@ -29,8 +29,8 @@
 #define __PIKA_VM__H
 #include "PikaObj.h"
 #include "dataQueue.h"
-#include "dataStack.h"
 #include "dataQueueObj.h"
+#include "dataStack.h"
 
 enum Instruct {
 #define __INS_ENUM
@@ -38,7 +38,8 @@ enum Instruct {
     __INSTRCUTION_CNT,
 };
 
-typedef struct VMState_t {
+typedef struct VMState VMState;
+struct VMState {
     VMParameters* locals;
     VMParameters* globals;
     Stack stack;
@@ -47,7 +48,7 @@ typedef struct VMState_t {
     ByteCodeFrame* bytecode_frame;
     uint8_t error_code;
     uint8_t line_error_code;
-} VMState;
+};
 
 VMParameters* pikaVM_run(PikaObj* self, char* pyLine);
 VMParameters* pikaVM_runAsm(PikaObj* self, char* pikaAsm);
@@ -118,20 +119,17 @@ InstructUnit* instructArray_getByOffset(InstructArray* self, int32_t offset);
 #define instructArray_getSize(InsturctArry_p_self) \
     ((size_t)(InsturctArry_p_self)->size)
 
-VMParameters* pikaVM_runByteCodeWithState(PikaObj* self,
-                                          VMParameters* locals,
-                                          VMParameters* globals,
-                                          ByteCodeFrame* bytecode_frame,
-                                          uint16_t pc);
-
 uint16_t constPool_getOffsetByData(ConstPool* self, char* data);
 void instructArray_printWithConst(InstructArray* self, ConstPool* const_pool);
 void constPool_update(ConstPool* self);
 void instructArray_update(InstructArray* self);
 void constPool_printAsArray(ConstPool* self);
 void instructArray_printAsArray(InstructArray* self);
-void byteCodeFrame_loadBytes(ByteCodeFrame* self, uint8_t* bytes);
+void byteCodeFrame_loadByteCode(ByteCodeFrame* self, uint8_t* bytes);
 void byteCodeFrame_printAsArray(ByteCodeFrame* self);
+void byteCodeFrame_init(ByteCodeFrame* self);
 VMParameters* pikaVM_runByteCode(PikaObj* self, uint8_t* bytecode);
+InstructUnit* instructArray_getNow(InstructArray* self);
+InstructUnit* instructArray_getNext(InstructArray* self);
 
 #endif

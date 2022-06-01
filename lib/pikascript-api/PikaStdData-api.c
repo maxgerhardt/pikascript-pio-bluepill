@@ -8,22 +8,27 @@
 #include "BaseObj.h"
 
 void PikaStdData_ByteArrayMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_ByteArray(self);
+    Arg* res = PikaStdData_ByteArray(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_DictMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_Dict(self);
+    Arg* res = PikaStdData_Dict(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_ListMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_List(self);
+    Arg* res = PikaStdData_List(self);
     method_returnArg(args, res);
 }
 
 void PikaStdData_StringMethod(PikaObj *self, Args *args){
-    Arg * res = PikaStdData_String(self);
+    Arg* res = PikaStdData_String(self);
+    method_returnArg(args, res);
+}
+
+void PikaStdData_UtilsMethod(PikaObj *self, Args *args){
+    Arg* res = PikaStdData_Utils(self);
     method_returnArg(args, res);
 }
 
@@ -33,6 +38,7 @@ PikaObj *New_PikaStdData(Args *args){
     class_defineConstructor(self, "Dict()->any", PikaStdData_DictMethod);
     class_defineConstructor(self, "List()->any", PikaStdData_ListMethod);
     class_defineConstructor(self, "String()->any", PikaStdData_StringMethod);
+    class_defineConstructor(self, "Utils()->any", PikaStdData_UtilsMethod);
     return self;
 }
 

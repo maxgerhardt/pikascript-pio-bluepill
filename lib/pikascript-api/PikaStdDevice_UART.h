@@ -17,9 +17,9 @@ void PikaStdDevice_UART_platformDisable(PikaObj *self);
 void PikaStdDevice_UART_platformEnable(PikaObj *self);
 void PikaStdDevice_UART_platformRead(PikaObj *self);
 void PikaStdDevice_UART_platformWrite(PikaObj *self);
-char * PikaStdDevice_UART_read(PikaObj *self, int length);
+char* PikaStdDevice_UART_read(PikaObj *self, int length);
 void PikaStdDevice_UART_setBaudRate(PikaObj *self, int baudRate);
 void PikaStdDevice_UART_setId(PikaObj *self, int id);
-void PikaStdDevice_UART_write(PikaObj *self, char * data);
+void PikaStdDevice_UART_write(PikaObj *self, char* data);
 
 #endif

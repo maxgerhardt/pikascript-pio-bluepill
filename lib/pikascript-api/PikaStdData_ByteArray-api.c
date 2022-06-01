@@ -8,7 +8,7 @@
 #include "BaseObj.h"
 
 void PikaStdData_ByteArray_fromStringMethod(PikaObj *self, Args *args){
-    char * s = args_getStr(args, "s");
+    char* s = args_getStr(args, "s");
     PikaStdData_ByteArray_fromString(self, s);
 }
 

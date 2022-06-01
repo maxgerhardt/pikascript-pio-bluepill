@@ -13,19 +13,19 @@ void PikaStdTask_Task___init__Method(PikaObj *self, Args *args){
 }
 
 void PikaStdTask_Task_call_alwaysMethod(PikaObj *self, Args *args){
-    Arg * fun_todo = args_getArg(args, "fun_todo");
+    Arg* fun_todo = args_getArg(args, "fun_todo");
     PikaStdTask_Task_call_always(self, fun_todo);
 }
 
 void PikaStdTask_Task_call_period_msMethod(PikaObj *self, Args *args){
-    Arg * fun_todo = args_getArg(args, "fun_todo");
+    Arg* fun_todo = args_getArg(args, "fun_todo");
     int period_ms = args_getInt(args, "period_ms");
     PikaStdTask_Task_call_period_ms(self, fun_todo, period_ms);
 }
 
 void PikaStdTask_Task_call_whenMethod(PikaObj *self, Args *args){
-    Arg * fun_todo = args_getArg(args, "fun_todo");
-    Arg * fun_when = args_getArg(args, "fun_when");
+    Arg* fun_todo = args_getArg(args, "fun_todo");
+    Arg* fun_when = args_getArg(args, "fun_when");
     PikaStdTask_Task_call_when(self, fun_todo, fun_when);
 }
 

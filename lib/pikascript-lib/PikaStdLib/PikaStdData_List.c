@@ -5,7 +5,7 @@ void PikaStdData_List_append(PikaObj* self, Arg* arg) {
     int top = obj_getInt(self, "top");
     char buff[11];
     char* topStr = fast_itoa(buff, top);
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     obj_setArg(pyload, topStr, arg);
     /* top++ */
     obj_setInt(self, "top", top + 1);
@@ -18,7 +18,7 @@ int PikaStdData_List_len(PikaObj* self) {
 Arg* PikaStdData_List_get(PikaObj* self, int i) {
     char buff[11];
     char* index = fast_itoa(buff, i);
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     return arg_copy(obj_getArg(pyload, index));
 }
 void PikaStdData_List___init__(PikaObj* self) {
@@ -35,13 +35,13 @@ void PikaStdData_List_set(PikaObj* self, Arg* arg, int i) {
         obj_setErrorCode(self, 1);
         obj_setSysOut(self, "[error]: index exceeded lengh of list.");
     }
-    PikaObj* pyload = obj_getObj(self, "pyload", 0);
+    PikaObj* pyload = obj_getObj(self, "pyload");
     obj_setArg(pyload, i_str, arg);
 }
 
 Arg* PikaStdData_List___iter__(PikaObj* self) {
     obj_setInt(self, "__iter_i", 0);
-    return arg_setPtr(NULL, "", ARG_TYPE_POINTER, self);
+    return arg_setRef(NULL, "", self);
 }
 
 Arg* PikaStdData_List___next__(PikaObj* self) {
@@ -66,9 +66,11 @@ void PikaStdData_ByteArray_fromString(PikaObj* self, char* s) {
     for (uint32_t i = 0; i < strGetSize(s); i++) {
         obj_setInt(self, "__val", (int)s[i]);
         PIKA_PYTHON_BEGIN
+        /* clang-format off */
         PIKA_PYTHON(
             append(__val)
         )
+        /* clang-format on */
         const uint8_t bytes[] = {
             0x08, 0x00, /* instruct array size */
             0x10, 0x81, 0x01, 0x00, 0x00, 0x02, 0x07, 0x00, /* instruct array */

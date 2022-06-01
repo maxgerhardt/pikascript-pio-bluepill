@@ -8,7 +8,7 @@
 #include "BaseObj.h"
 
 void PikaDebug_DebugerMethod(PikaObj *self, Args *args){
-    Arg * res = PikaDebug_Debuger(self);
+    Arg* res = PikaDebug_Debuger(self);
     method_returnArg(args, res);
 }
 

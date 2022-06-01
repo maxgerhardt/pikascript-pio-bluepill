@@ -43,25 +43,31 @@ enum TokenType {
 enum StmtType {
     STMT_reference,
     STMT_string,
+    STMT_bytes,
     STMT_number,
     STMT_method,
     STMT_operator,
+    STMT_import,
+    STMT_list,
     STMT_none,
 };
 
-typedef struct Asmer_t {
+typedef struct Asmer Asmer;
+struct Asmer {
     char* asm_code;
     uint8_t block_deepth_now;
     uint8_t is_new_line;
     char* line_pointer;
-} Asmer;
+};
 
+typedef struct LexToken LexToken;
 struct LexToken {
     char* token;
     enum TokenType type;
     char* pyload;
 };
 
+typedef struct ParserState ParsetState;
 struct ParserState {
     char* tokens;
     uint16_t length;
@@ -81,14 +87,23 @@ ByteCodeFrame* byteCodeFrame_appendFromAsm(ByteCodeFrame* bf, char* pikaAsm);
 int bytecodeFrame_fromMultiLine(ByteCodeFrame* bytecode_frame,
                                 char* python_lines);
 void Parser_compilePyToBytecodeArray(char* lines);
+char* Parser_parsePyLines(Args* outBuffs,
+                          ByteCodeFrame* bytecode_frame,
+                          char* py_lines);
 #define ParserState_forEach(parseState)  \
     ParserState_beforeIter(&parseState); \
     for (int i = 0; i < parseState.length; i++)
 
-#define ParserState_forEachToken(parseState, tokens) \
-    struct ParserState ps;                     \
-    /* init parserStage */                     \
-    ParserState_init(&parseState);             \
-    ParserState_parse(&parseState, tokens);    \
+#define ParserState_forEachTokenExistPs(parseState, tokens) \
+    /* init parserStage */                                  \
+    ParserState_init(&parseState);                          \
+    ParserState_parse(&parseState, tokens);                 \
     ParserState_forEach(parseState)
+
+#define ParserState_forEachToken(parseState, tokens) \
+    struct ParserState ps;                           \
+    ParserState_forEachTokenExistPs(parseState, tokens)
+
+uint16_t Tokens_getSize(char* tokens);
+
 #endif
